@@ -1,23 +1,12 @@
-// Firebase modüllerini içe aktar
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js";
+import { auth } from "./firebaseConfig.js";
+import { 
+    signInWithEmailAndPassword, 
+    createUserWithEmailAndPassword, 
+    signOut, 
+    onAuthStateChanged 
+} from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js";
 
-// Firebase yapılandırması
-const firebaseConfig = {
-    apiKey: "AIzaSyDsxXz6sBL3xm-DDOOW4rsWfQ0Zh4pKHf4",
-    authDomain: "carlot-2a929.firebaseapp.com",
-    projectId: "carlot-2a929",
-    storageBucket: "carlot-2a929.firebasestorage.app",
-    messagingSenderId: "1022260912789",
-    appId: "1:1022260912789:web:73b74663cdd599b7b4b19c",
-    measurementId: "G-5F2RC50QRY"
-};
-
-// Firebase başlat
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-// Giriş yap fonksiyonu
+// Kullanıcı giriş fonksiyonu
 function signIn() {
     document.getElementById("signInForm").addEventListener("submit", function(event) {
         event.preventDefault();
@@ -28,7 +17,7 @@ function signIn() {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 alert("Giriş Başarılı! 🚀");
-                window.location.href = "index.html"; // Kullanıcıyı ana sayfaya yönlendir
+                window.location.href = "index.html"; 
             })
             .catch((error) => {
                 alert("Hata: " + error.message);
@@ -36,19 +25,18 @@ function signIn() {
     });
 }
 
-// Kayıt ol fonksiyonu
+// Kullanıcı kayıt fonksiyonu
 function signUp() {
     document.getElementById("signUpForm").addEventListener("submit", function(event) {
         event.preventDefault();
 
-        const fullName = document.getElementById("fullName").value;
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
 
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 alert("Kayıt Başarılı! 🎉");
-                window.location.href = "signIn.html"; // Kullanıcıyı giriş sayfasına yönlendir
+                window.location.href = "signIn.html"; 
             })
             .catch((error) => {
                 alert("Hata: " + error.message);
@@ -56,12 +44,52 @@ function signUp() {
     });
 }
 
-// Sayfa yüklendiğinde ilgili fonksiyonları çalıştır
-document.addEventListener("DOMContentLoaded", function() {
-    if (document.getElementById("signInForm")) {
-        signIn();
-    }
-    if (document.getElementById("signUpForm")) {
-        signUp();
-    }
+// Kullanıcı çıkış fonksiyonu
+function handleAuthState() {
+    const authButtons = document.querySelector(".auth-buttons");
+    const userIconContainer = document.createElement("div");
+    userIconContainer.classList.add("user-icon-container");
+
+    const userIcon = document.createElement("i");
+    userIcon.classList.add("fas", "fa-user-circle", "user-icon");
+    userIcon.style.fontSize = "24px";
+    userIcon.style.cursor = "pointer";
+
+    const logoutButton = document.createElement("button");
+    logoutButton.textContent = "Sign Out";
+    logoutButton.classList.add("logout-button");
+    logoutButton.style.display = "none"; 
+
+    userIconContainer.appendChild(userIcon);
+    userIconContainer.appendChild(logoutButton);
+    document.querySelector(".header-container").appendChild(userIconContainer);
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            authButtons.style.display = "none"; 
+            userIconContainer.style.display = "flex"; 
+        } else {
+            authButtons.style.display = "flex"; 
+            userIconContainer.style.display = "none"; 
+        }
+    });
+
+    userIcon.addEventListener("click", () => {
+        logoutButton.style.display = logoutButton.style.display === "none" ? "block" : "none";
+    });
+
+    logoutButton.addEventListener("click", () => {
+        signOut(auth).then(() => {
+            window.location.href = "index.html";
+        }).catch((error) => {
+            alert("Çıkış yapılamadı: " + error.message);
+        });
+    });
+}
+
+// Sayfa yüklendiğinde başlat
+document.addEventListener("DOMContentLoaded", () => {
+    if (document.getElementById("signInForm")) signIn();
+    if (document.getElementById("signUpForm")) signUp();
+    handleAuthState();
 });
