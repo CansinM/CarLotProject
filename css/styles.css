@@ -311,3 +311,10 @@ button:hover {
 .logout-button:hover {
     background: #a30000;
 }
+
+.user-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
+

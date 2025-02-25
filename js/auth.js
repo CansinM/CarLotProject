@@ -5,6 +5,8 @@ import {
     signOut, 
     onAuthStateChanged 
 } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js";
+import { updateProfile } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js";
+
 
 // Kullanıcı giriş fonksiyonu
 function signIn() {
@@ -30,13 +32,23 @@ function signUp() {
     document.getElementById("signUpForm").addEventListener("submit", function(event) {
         event.preventDefault();
 
+        const fullName = document.getElementById("fullName").value;
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
 
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                alert("Kayıt Başarılı! 🎉");
-                window.location.href = "signIn.html"; 
+                const user = userCredential.user;
+
+                // Kullanıcı adını güncelle
+                updateProfile(user, {
+                    displayName: fullName
+                }).then(() => {
+                    alert("Kayıt Başarılı! 🎉");
+                    window.location.href = "signIn.html"; // Kullanıcıyı giriş sayfasına yönlendir
+                }).catch((error) => {
+                    alert("Profil güncellenirken hata oluştu: " + error.message);
+                });
             })
             .catch((error) => {
                 alert("Hata: " + error.message);
@@ -67,12 +79,28 @@ function handleAuthState() {
     onAuthStateChanged(auth, (user) => {
         if (user) {
             authButtons.style.display = "none"; 
-            userIconContainer.style.display = "flex"; 
+            userIconContainer.style.display = "flex";
+    
+            // Kullanıcı adı için span elementi oluştur
+            let userNameSpan = document.querySelector(".user-name");
+            if (!userNameSpan) {
+                userNameSpan = document.createElement("span");
+                userNameSpan.classList.add("user-name");
+                userNameSpan.style.color = "#fff";
+                userNameSpan.style.marginLeft = "10px";
+                userNameSpan.style.fontWeight = "bold";
+                userNameSpan.style.fontSize = "16px";
+                userIconContainer.insertBefore(userNameSpan, logoutButton);
+            }
+    
+            // Kullanıcı adını güncelle (Eğer boşsa email kullan)
+            userNameSpan.textContent = user.displayName ? user.displayName : user.email.split("@")[0];
         } else {
             authButtons.style.display = "flex"; 
             userIconContainer.style.display = "none"; 
         }
     });
+    
 
     userIcon.addEventListener("click", () => {
         logoutButton.style.display = logoutButton.style.display === "none" ? "block" : "none";
