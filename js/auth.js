@@ -17,39 +17,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// Kullanıcı durumunu izleme
-onAuthStateChanged(auth, (user) => {
-    const authButtons = document.getElementById("authButtons");
-    const userInfo = document.getElementById("userInfo");
-    const userEmail = document.getElementById("userEmail");
-    const signOutButton = document.getElementById("signOutButton");
-
-    if (user) {
-        // Kullanıcı giriş yaptıysa
-        authButtons.style.display = "none";
-        userInfo.style.display = "flex";
-        userEmail.textContent = user.email;
-    } else {
-        // Kullanıcı çıkış yaptıysa
-        authButtons.style.display = "block";
-        userInfo.style.display = "none";
-    }
-});
-
-// Çıkış yapma fonksiyonu
-document.getElementById("userEmail").addEventListener("click", function() {
-    document.getElementById("signOutButton").style.display = "block";
-});
-
-document.getElementById("signOutButton").addEventListener("click", function() {
-    signOut(auth).then(() => {
-        alert("Başarıyla çıkış yapıldı!");
-        window.location.reload();
-    }).catch((error) => {
-        alert("Hata: " + error.message);
-    });
-});
-
 // Giriş yap fonksiyonu
 function signIn() {
     document.getElementById("signInForm").addEventListener("submit", function(event) {
