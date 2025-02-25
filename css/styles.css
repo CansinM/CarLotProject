@@ -273,3 +273,41 @@ button:hover {
     flex-direction: column;
     justify-content: center;
 } 
+
+.user-icon-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 20px;
+}
+
+.user-icon {
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.user-icon:hover {
+    transform: scale(1.1);
+    color: #ffcc00;
+}
+
+.logout-button {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: #8B0000;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: none;
+    transition: 0.3s;
+}
+
+.logout-button:hover {
+    background: #a30000;
+}
