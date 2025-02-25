@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarLot - Araç Sonuçları</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/resultsStyles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1 class="logo">CarLot</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Ana Sayfa</a></li>
+                    <li><a href="#"><i class="fas fa-heart"></i> Favoriler</a></li>
+                    <li><a href="#"><i class="fas fa-search"></i> Detaylı Arama</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="sign-in" onclick="window.location.href='signIn.html'">Sign In</button>
+                <button class="sign-up" onclick="window.location.href='signUp.html'">Sign Up</button>
+            </div> 
+        </div>
+    </header>
+
+    <!-- Arama Sonuçları -->
+    <section class="results">
+        <h2>Arama Sonuçları</h2>
+        <div class="car-list">
+            <!-- Araçlar buraya dinamik olarak eklenecek -->
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const selectedBrand = urlParams.get("brand") || "BMW";
+            const selectedModel = urlParams.get("model") || "5 Serisi";
+            const selectedYear = urlParams.get("year") || "2015";
+
+            const carList = document.querySelector(".car-list");
+
+            // Örnek araçlar (Rastgele veriler)
+            const sampleCars = [
+                {
+                    brand: selectedBrand,
+                    model: selectedModel,
+                    year: selectedYear,
+                    km: "277.000",
+                    color: "Kahverengi",
+                    price: "1.420.000 TL",
+                    image: "images/car1.jpg",
+                    location: "Bursa Nilüfer"
+                },
+                {
+                    brand: selectedBrand,
+                    model: selectedModel,
+                    year: selectedYear,
+                    km: "131.410",
+                    color: "Mavi",
+                    price: "2.590.000 TL",
+                    image: "images/car2.jpg",
+                    location: "Samsun İlkadım"
+                },
+                {
+                    brand: selectedBrand,
+                    model: selectedModel,
+                    year: selectedYear,
+                    km: "348.000",
+                    color: "Beyaz",
+                    price: "1.085.000 TL",
+                    image: "images/car3.jpg",
+                    location: "Ankara Yenimahalle"
+                },
+                {
+                    brand: selectedBrand,
+                    model: selectedModel,
+                    year: selectedYear,
+                    km: "174.000",
+                    color: "Lacivert",
+                    price: "1.655.000 TL",
+                    image: "images/car4.jpg",
+                    location: "Bursa Osmangazi"
+                },
+                {
+                    brand: selectedBrand,
+                    model: selectedModel,
+                    year: selectedYear,
+                    km: "279.500",
+                    color: "Beyaz",
+                    price: "1.575.000 TL",
+                    image: "images/car5.jpg",
+                    location: "İstanbul Bağcılar"
+                }
+            ];
+
+            carList.innerHTML = ""; // Temizleme işlemi
+
+            sampleCars.forEach(car => {
+                const carItem = document.createElement("div");
+                carItem.classList.add("car-card");
+
+                carItem.innerHTML = `
+                    <img src="${car.image}" alt="${car.brand} ${car.model}">
+                    <div class="car-details">
+                        <h3>${car.brand} ${car.model}</h3>
+                        <p><strong>Yıl:</strong> ${car.year}</p>
+                        <p><strong>KM:</strong> ${car.km}</p>
+                        <p><strong>Renk:</strong> ${car.color}</p>
+                        <p><strong>Fiyat:</strong> ${car.price}</p>
+                        <p><strong>Konum:</strong> ${car.location}</p>
+                        <button class="favorite-button"><i class="fas fa-heart"></i> Favorilere Ekle</button>
+                    </div>
+                `;
+                carList.appendChild(carItem);
+            });
+
+            // Favorilere ekleme işlemi
+            document.querySelectorAll(".favorite-button").forEach(button => {
+                button.addEventListener("click", function () {
+                    this.innerHTML = '<i class="fas fa-check"></i> Favorilere Eklendi';
+                    this.disabled = true;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

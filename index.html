@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarLot - İkinci El Araçlar</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1 class="logo">CarLot</h1>
+            <nav>
+                <ul>
+                    <li><a href="#"><i class="fas fa-home"></i> Ana Sayfa</a></li>
+                    <li><a href="#"><i class="fas fa-heart"></i> Favoriler</a></li>
+                    <li><a href="#"><i class="fas fa-search"></i> Detaylı Arama</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="sign-in" onclick="window.location.href='signIn.html'">Sign In</button>
+                <button class="sign-up" onclick="window.location.href='signUp.html'">Sign Up</button>
+            </div>            
+        </div>
+    </header>
+
+    <section class="search-options">
+        <h2>Aracınızı Bulun</h2>
+        <form id="searchForm">
+            <div class="dropdown">
+                <select id="brand" name="brand">
+                    <option value="">Marka Seçin</option>
+                </select>                
+            </div>
+            <div class="dropdown">
+                <select id="model" name="model">
+                    <option value="">Model Seçin</option>
+                </select>                
+            </div>
+            <div class="dropdown">
+                <select id="year" name="year">
+                    <option value="">Yıl Seçin</option>
+                </select>                
+            </div>
+            <button type="submit" class="search-button"><i class="fas fa-search"></i> Araç Bul</button>
+        </form>        
+    </section>
+
+    <section class="info-section">
+        <div class="info-card">
+            <i class="fas fa-tags"></i>
+            <h3>Hayalinizdeki Aracı En Uygun Fiyata Bulun!</h3>
+            <p>Markaya, modele ve bütçenize göre filtreleyin.</p>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-user-shield"></i>
+            <h3>Güvenilir Satıcılarla Tanışın, Doğru Kararı Verin!</h3>
+            <p>Gerçek kullanıcı yorumları ve güvenilir ilanlarla alışveriş yapın.</p>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-clock"></i>
+            <h3>İkinci El Araba Alırken Zamandan Kazanın!</h3>
+            <p>Türkiye genelinde binlerce ilanı saniyeler içinde karşılaştırın.</p>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-chart-line"></i>
+            <h3>Aracınızın Piyasa Değerini Hemen Öğrenin!</h3>
+            <p>Aracınızın modeline göre anlık fiyat değerlendirmesi alın.</p>
+        </div>
+    </section>
+
+    <section class="content">
+        <article>
+            <h3>Neden Biz?</h3>
+            <p>"İkinci El Araç Piyasasını Anlık Takip Edin!" Gelişmiş algoritmalarımız ile ikinci el araç piyasasındaki fiyat değişimlerini anlık olarak analiz ediyoruz. En güncel fiyat bilgileriyle aracınızı doğru fiyata alın veya satın.</p>
+        </article>
+        <article>
+            <h3>Araba Almayı mı Düşünüyorsunuz?</h3>
+            <p>Hayalinizdeki aracı bulmak artık çok kolay! Markaya, modele, fiyat aralığına ve birçok detaya göre filtreleyerek en uygun seçenekleri keşfedin.</p>
+        </article>
+        <article>
+            <h3>Arabanızın Değerini Öğrenin!</h3>
+            <p>Aracınızın güncel piyasa değerini öğrenmek için sadece birkaç bilgiyi girmeniz yeterli. Gerçek satış verilerine dayalı fiyatlandırma ile doğru karar verin.</p>
+        </article>
+        <article>
+            <h3>Güvenilir Satıcılar ve İlanlar</h3>
+            <p>Şeffaf ve güvenilir ilan yapımız sayesinde dolandırıcılığa karşı korunun. Gerçek kullanıcı yorumları ve detaylı ilan bilgileriyle güvenle alışveriş yapın.</p>
+        </article>
+        <article>
+            <h3>Hangi Araç Daha Mantıklı?</h3>
+            <p>Tereddütte mi kaldınız? Fiyat-performans karşılaştırmaları, en popüler ikinci el modelleri ve uzman yorumları ile doğru tercihi yapın.</p>
+        </article>
+    </section>
+
+    <script src="js/scripts.js"></script>
+</body>
+</html> 

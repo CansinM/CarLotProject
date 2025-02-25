@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/resultsStyles.css">
+    <link rel="stylesheet" href="css/authStyles.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1 class="logo">CarLot</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Ana Sayfa</a></li>
+                    <li><a href="#"><i class="fas fa-heart"></i> Favoriler</a></li>
+                    <li><a href="#"><i class="fas fa-search"></i> Detaylı Arama</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="sign-in" onclick="window.location.href='signIn.html'">Sign In</button>
+            </div>  
+        </div>
+    </header>
+    <div class="auth-container">
+        <h2>Create Account</h2>
+        <p>Join us and find your dream car</p>
+        <form id="signUpForm">
+            <div class="input-group">
+                <input type="text" placeholder="Full Name" id="fullName" required>
+            </div>
+            <div class="input-group">
+                <input type="email" placeholder="Email" id="email" required>
+            </div>
+            <div class="input-group">
+                <input type="password" placeholder="Password" id="password" required>
+            </div>
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="signIn.html">Sign In</a></p>
+    </div>
+    <script type="module" src="js/auth.js"></script>
+</body>
+</html>
