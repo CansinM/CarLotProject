@@ -6,6 +6,7 @@ import {
     onAuthStateChanged 
 } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js";
 import { updateProfile } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js";
+import { db, collection, getDocs } from "./firebaseConfig.js";
 
 
 // Kullanıcı giriş fonksiyonu
@@ -120,4 +121,39 @@ document.addEventListener("DOMContentLoaded", () => {
     if (document.getElementById("signInForm")) signIn();
     if (document.getElementById("signUpForm")) signUp();
     handleAuthState();
+});
+
+document.addEventListener("DOMContentLoaded", async function () {
+    const carList = document.querySelector(".car-list");
+
+    try {
+        // Firestore'daki "cars" koleksiyonunu oku
+        const querySnapshot = await getDocs(collection(db, "cars"));
+        
+        carList.innerHTML = ""; // Önce mevcut listeyi temizle
+
+        querySnapshot.forEach((doc) => {
+            const car = doc.data(); // Firestore'dan gelen her belge
+            const carItem = document.createElement("div");
+            carItem.classList.add("car-card");
+
+            carItem.innerHTML = `
+                <img src="${car.image}" alt="${car.brand} ${car.model}">
+                <div class="car-details">
+                    <h3>${car.brand} ${car.model}</h3>
+                    <p><strong>Yıl:</strong> ${car.year}</p>
+                    <p><strong>KM:</strong> ${car.km}</p>
+                    <p><strong>Renk:</strong> ${car.color}</p>
+                    <p><strong>Fiyat:</strong> ${car.price}</p>
+                    <p><strong>Konum:</strong> ${car.location}</p>
+                    <button class="favorite-button"><i class="fas fa-heart"></i> Favorilere Ekle</button>
+                </div>
+            `;
+
+            carList.appendChild(carItem);
+        });
+
+    } catch (error) {
+        console.error("Araçları yüklerken hata oluştu:", error);
+    }
 });

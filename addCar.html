@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarLot - Araç Ekle</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1 class="logo">CarLot</h1>
+            <nav>
+                <ul>
+                    <li><a href="#"><i class="fas fa-home"></i> Ana Sayfa</a></li>
+                    <li><a href="#"><i class="fas fa-heart"></i> Favoriler</a></li>
+                    <li><a href="#"><i class="fas fa-search"></i> Detaylı Arama</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="sign-in" onclick="window.location.href='signIn.html'">Sign In</button>
+                <button class="sign-up" onclick="window.location.href='signUp.html'">Sign Up</button>
+            </div>                      
+        </div>
+    </header>
+
+    <section class="form-container">
+        <form id="addCarForm">
+            <input type="text" id="brand" placeholder="Marka" required>
+            <input type="text" id="model" placeholder="Model" required>
+            <input type="number" id="year" placeholder="Yıl" required>
+            <input type="number" id="km" placeholder="Kilometre" required>
+            <input type="text" id="color" placeholder="Renk" required>
+            <input type="text" id="price" placeholder="Fiyat" required>
+            <input type="text" id="location" placeholder="Konum" required>
+            <input type="text" id="image" placeholder="Resim URL" required>
+            <button type="submit">Araç Ekle</button>
+        </form>
+    </section>
+
+    <script type="module" src="js/addCar.js"></script>
+</body>
+</html>

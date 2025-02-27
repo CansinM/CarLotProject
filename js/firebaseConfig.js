@@ -1,6 +1,7 @@
 // Firebase modüllerini içe aktar
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js";
+import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js";
 
 // Firebase yapılandırma bilgileri (Gerçek değerlerle değiştir)
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -17,5 +18,6 @@ const firebaseConfig = {
 // Firebase başlat ve dışa aktar
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app); // Firestore bağlantısı
 
-export { auth };
+export { auth, db, collection, getDocs, addDoc };
