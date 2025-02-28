@@ -1,0 +1,76 @@
+/* Genel Sayfa Stili */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #f4f4f4, #e2e2e2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Form Konteyneri */
+.form-container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    width: 100%;
+}
+
+/* Form Başlığı */
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #8B0000;
+}
+
+/* Izgara Düzeni */
+#addCarForm {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    align-items: center;
+}
+
+/* Simetrik Input Alanları */
+#addCarForm input[type="text"],
+#addCarForm input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    text-align: center;
+}
+
+/* Buton Tam Genişlikte ve Simetrik */
+#addCarForm button {
+    grid-column: span 2;
+    background: #8B0000;
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 1.1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+#addCarForm button:hover {
+    background: #a30000;
+    transform: scale(1.05);
+}
+
+/* Mobil Duyarlılık */
+@media (max-width: 600px) {
+    #addCarForm {
+        grid-template-columns: 1fr;
+    }
+    #addCarForm button {
+        grid-column: span 1;
+    }
+}

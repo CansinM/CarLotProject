@@ -341,3 +341,104 @@ button:hover {
     background-color: #e6b800;
     transform: scale(1.05);
 }
+
+/* Mobilde Menü Gizleme */
+.menu-toggle {
+    display: none;
+    font-size: 1.8em;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: white;
+    position: absolute;
+    left: 15px;
+    top: 15px;
+}
+
+/* Offcanvas Menü */
+.offcanvas-menu {
+    position: fixed;
+    top: 0;
+    left: -1000px; /* Varsayılan olarak tamamen gizli */
+    width: 250px;
+    height: 100%;
+    background: #8B0000;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s ease-in-out;
+    padding: 20px;
+    z-index: 1001;
+}
+
+.offcanvas-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.offcanvas-menu ul li {
+    margin: 20px 0;
+}
+
+.offcanvas-menu ul li a {
+    color: white;
+    font-size: 1.2em;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.offcanvas-menu ul li a:hover {
+    color: #ffcc00;
+}
+
+.close-menu {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+/* Mobil Ekranlarda Menü Göster */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .header-container {
+        display: flex;
+        justify-content: center; /* Logo tam ortada olacak */
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        position: relative; /* Kullanıcı adı için sabitleme */
+    }
+    
+    /* Kullanıcı ikonu ve adı sağda kalsın */
+    .user-icon-container {
+        position: absolute;
+        right: 20px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+}
+
+/* Açılınca sola kaydır */
+.offcanvas-menu.open {
+    left: 0;
+}
+
+/* Menü açıldığında sayfanın kaymasını önle */
+body.menu-open {
+    overflow: hidden;
+}
